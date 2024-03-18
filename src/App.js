@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css'
 import Detail from "./pages/Detail";
 import {Routes, Route, Link, useNavigate, Outlet} from "react-router-dom"
@@ -15,10 +15,20 @@ import About from "./pages/About";
 import dummydata from "./dummydatas/data";
 import axios from "axios";
 import Cart from "./pages/Cart";
+import {useQuery} from "react-query";
 function App(props) {
+    useEffect(()=>{
+        localStorage.setItem('watched', JSON.stringify( [] ))
+    },[])
     let navigate = useNavigate()
     const [shoes, setShoes] = useState(dummydata); // 상태와 상태를 업데이트하는 함수를 받음
     const [loading, setLoading] = useState(false); // 로딩 상태를 위한 상태 변수 추가
+  let result = useQuery('작명',()=>{
+      return  axios.get('https://codingapple1.github.io/userdata.json').then((a)=>{
+         return  a.data
+      })
+  })
+
     const addData = () => {
         setLoading(true); // 로딩 시작
         axios.get('https://codingapple1.github.io/shop/data2.json')
@@ -32,6 +42,9 @@ function App(props) {
                 setLoading(false); // 로딩 실패로도 간주, 로딩 상태 해제
             });
     };
+
+
+
     return (
         <div className="App">
             <NavbarComponent />
@@ -67,6 +80,7 @@ function App(props) {
         </Route>
     </Routes>
 
+            <Nav className="ms-auto">{result.isLoading ? '로딩중' : result.data.name}</Nav>
     <Link to='/'>홈</Link>
     <Link to='/lists'>리스트</Link>
     <Link to='/detail'>디테일</Link>

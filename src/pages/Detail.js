@@ -3,7 +3,10 @@ import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import {useEffect, useState} from "react";
 import {Nav} from "react-bootstrap";
+import {useDispatch} from "react-redux";
+import {addItem} from "../store";
 function Detail(props) {
+    let dispatch = useDispatch()
     let {id} = useParams()
     let 찾은상품 = props.shoes.find(x => parseInt(x.id) === parseInt(id));
     let YellowBox = styled.div`
@@ -19,6 +22,15 @@ function Detail(props) {
         }
     }, []);
     let [count, setCount] = useState(0)
+    useEffect(()=>{
+        let 꺼낸거 = localStorage.getItem('watched')
+        꺼낸거 = JSON.parse(꺼낸거)
+        꺼낸거.push(찾은상품.id)
+        //Set으로 바꿨다가 다시 array로 만들기
+        꺼낸거 = new Set(꺼낸거)
+        꺼낸거 = Array.from(꺼낸거)
+        localStorage.setItem('watched', JSON.stringify(꺼낸거))
+    }, [])
 return(
     <div className="container">
         <div className="row">
@@ -37,12 +49,14 @@ return(
                         <h4 className="pt-5">{찾은상품.title}</h4>
                         <p>{찾은상품.content}</p>
                         <p>{찾은상품.price}</p>
-                        <button className="btn btn-danger">주문하기</button>
+                        <button className="btn btn-danger" onClick={()=>{
+                            dispatch(addItem({id : 1, name : 'Red Knit', count : 1}))
+                        }}>주문하기</button>
                     </div>
                 ) : (
                     <div>상품을 찾을 수 없습니다.</div>
                 )}
-                <button className="btn btn-danger">주문하기</button>
+
                 <YellowBox>hello woooooooo</YellowBox>
                 <button onClick={()=>{ setCount(count+1) }}>버튼</button>
 
