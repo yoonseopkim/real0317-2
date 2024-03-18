@@ -68,9 +68,13 @@ return(
     </div>
 )
 }
-function TabContent(props){
+function TabContent({탭}){
 
-    return [ <div>내용0</div>, <div>내용1</div>, <div>내용2</div> ][props.탭]
+    return (
+        <div className="start end">
+            { [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭] }
+        </div>
+    );
 }
 
 export default Detail;

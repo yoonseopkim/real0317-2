@@ -9,17 +9,21 @@ const NavbarComponent = () => {
             <Container>
                 <Navbar.Brand href="#home">Navbar</Navbar.Brand>
                 <Nav className="me-auto">
-                    <Nav.Link href="#home" onClick={()=>{
+                    <Nav.Link href="#" onClick={()=>{
                         navigate('/')
                     }}>Home</Nav.Link>
 
-                    <Nav.Link href="#home" onClick={()=>{
+                    <Nav.Link href="#" onClick={()=>{
                         navigate('/lists')
                     }}>lists</Nav.Link>
 
-                    <Nav.Link href="#home" onClick={()=>{
+                    <Nav.Link href="#" onClick={()=>{
                         navigate('/detail')
                     }}>detail</Nav.Link>
+
+                    <Nav.Link href="#" onClick={()=>{
+                        navigate('/cart')
+                    }}>Cart</Nav.Link>
 
 
                 </Nav>

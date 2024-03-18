@@ -14,6 +14,7 @@ import Products from "./components/Products";
 import About from "./pages/About";
 import dummydata from "./dummydatas/data";
 import axios from "axios";
+import Cart from "./pages/Cart";
 function App(props) {
     let navigate = useNavigate()
     const [shoes, setShoes] = useState(dummydata); // 상태와 상태를 업데이트하는 함수를 받음
@@ -53,6 +54,7 @@ function App(props) {
 
 
     <Routes>
+        <Route path="/cart" element={ <Cart/> } />
         <Route path="/detail" element={<Detail shoes={shoes}/>} />
         <Route path="/detail/:id" element={ <Detail shoes={shoes}/> }/>
         <Route path="/lists" element={<Lists />} />
