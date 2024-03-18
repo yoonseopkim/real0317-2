@@ -8,6 +8,7 @@ function List(props) {
     let [좋아요개수, 좋아요변경] = useState([0, 0, 0])
     let [modal, setModal] = useState(false);
     let [title, setTitle] = useState(0);
+    let [입력값, 입력값변경] = useState('');
     return (
         <div>
 
@@ -44,6 +45,14 @@ function List(props) {
                                     글제목변경(정렬된글제목)
                                 }}>가나다정렬
                                 </button>
+                                <button onClick={()=>{
+                                    let copy = [...글제목];
+                                    copy.splice(index, 1);
+                                    글제목변경(copy);
+                                }}
+                                >글삭제</button>
+
+
                             </div>
 
 
@@ -57,6 +66,20 @@ function List(props) {
                 modal == true ? <Modal 글제목={글제목} title={title}/> : null
 
             }
+
+
+            <input onChange={(e)=>{
+                입력값변경(e.target.value)
+
+            }} />
+<button onClick={()=>{
+    let copy = [...글제목];
+    copy.unshift(입력값);
+    글제목변경(copy)
+}}>
+    글작성
+</button>
+
 
 
         </div>
