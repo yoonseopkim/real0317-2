@@ -1,33 +1,53 @@
 import React, {useState} from 'react';
 import './App.css'
 import Detail from "./pages/Detail";
-import {BrowserRouter, Routes, Route, Link} from "react-router-dom"
+import {Routes, Route, Link, useNavigate, Outlet} from "react-router-dom"
 import Modal from "./components/Modal";
-import Navbar from "./components/Navbar";
 import List from "./components/List"
-import detail from "./pages/Detail";
-
+import Lists from "./pages/Lists";
+import lists from "./pages/Lists";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Button, Navbar, Container, Nav} from 'react-bootstrap'
+import NavbarComponent from "./components/NavbarComponent";
+import bg from './bg.png'
+import Products from "./components/Products";
+import About from "./pages/About";
 function App(props) {
-
+    let navigate = useNavigate()
     return (
         <div className="App">
-            <div><Navbar></Navbar></div>
+            <NavbarComponent />
+
+            <div className="main-bg" style={{ backgroundImage : 'url(' + bg + ')' }}></div>
 
 
-            <List/>
+<Products></Products>
 
 
 
 
 
-            <BrowserRouter>
-                <Routes>
-                    <Route path='/detail' component={detail}/>
-                    <Route path='/' component={<div>홈</div>}/>
-                </Routes>
-                <Link to='/'>홈</Link>
-                <Link to='/detail'>디테일</Link>
-            </BrowserRouter>
+
+
+
+
+    <Routes>
+        <Route path="/detail" element={<Detail />} />
+        <Route path="/lists" element={<Lists />} />
+        <Route path="/" element={<div>홈</div>} />
+        <Route path="*" element={ <div>없는페이지임</div> } />
+
+        <Route path="/about" element={ <About/> } >
+            <Route path="member" element={ <div>멤버들</div> } />
+            <Route path="location" element={ <div>회사위치</div> } />
+        </Route>
+    </Routes>
+
+    <Link to='/'>홈</Link>
+    <Link to='/lists'>리스트</Link>
+    <Link to='/detail'>디테일</Link>
+
+
 
 
             {/*//어지간한거 이 위에다가 해야함*/}

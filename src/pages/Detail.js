@@ -2,11 +2,18 @@ import App from "../App";
 
 function Detail() {
 return(
-    <div className="modal">
-        <h4>디테일페이지입니다</h4>
-        <h4>제목</h4>
-        <p>날짜</p>
-        <p>상세내용</p>
+    <div className="container">
+        <div className="row">
+            <div className="col-md-6">
+                <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+            </div>
+            <div className="col-md-6">
+                <h4 className="pt-5">상품명</h4>
+                <p>상품설명</p>
+                <p>120000원</p>
+                <button className="btn btn-danger">주문하기</button>
+            </div>
+        </div>
     </div>
 )
 }
